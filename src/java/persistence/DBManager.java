@@ -68,7 +68,9 @@ public class DBManager {
         return l;
     }
     
-    public static List<Log> findLogByID(EntityManager em, Date d){
+    //TODO: Figure out how to query timestamp intervals
+    /*
+    public static List<Log> findLogByDate(EntityManager em, Date d){
         Query query = em.createQuery(
                 "SELECT l FROM Log l" +
                 " WHERE l.TIMESTAMP >= :date1 AND l.TIMESTAMPE <= :date2");
@@ -79,7 +81,7 @@ public class DBManager {
             return null;
         } 
         return results;
-    }
+    } */
     
     public static boolean addUser(EntityManager em, UserTransaction utx, User u) {
         if(findUserByID(em,u.getId()).equals(u)){
