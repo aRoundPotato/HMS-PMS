@@ -10,64 +10,64 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  *
- * @author kenmu
+ * @author kmurr
  */
 @Entity
-@Table(name="Users")
-public abstract class User implements Serializable {
+public class Request implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String password;
-    private String email;
-    private String name;
-    private int beepExt;
-    private int phoneExt;
-        
+    private Patient patient;
+    private String reason;
+    private int priority;
+    private ChargeNurse nurse;
+    private Doctor doctor;
+
+    
+
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
-    public String getPassword() {
-        return password;
+    public Patient getPatient() {
+        return patient;
     }
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
-    public String getEmail() {
-        return email;
+    public String getReason() {
+        return reason;
     }
-    public void setEmail(String email) {
-        this.email = email;
-    }   
-    public String getName(){
-        return name;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
-    public void setName(String name){
-        this.name = name;
+    public int getPriority() {
+        return priority;
     }
-    public int getBeepExt() {
-        return beepExt;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
-
-    public void setBeepExt(int beepExt) {
-        this.beepExt = beepExt;
+    public ChargeNurse getNurse() {
+        return nurse;
     }
-
-    public int getPhoneExt() {
-        return phoneExt;
+    public void setNurse(ChargeNurse nurse) {
+        this.nurse = nurse;
     }
-
-    public void setPhoneExt(int phoneExt) {
-        this.phoneExt = phoneExt;
+    public Doctor getDoctor() {
+        return doctor;
     }
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+    
+    
     
 
     @Override
@@ -80,10 +80,10 @@ public abstract class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof Request)) {
             return false;
         }
-        User other = (User) object;
+        Request other = (Request) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -92,7 +92,7 @@ public abstract class User implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.User[ id=" + id + " ]";
+        return "persistence.Request[ id=" + id + " ]";
     }
     
 }
