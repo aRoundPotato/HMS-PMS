@@ -22,24 +22,31 @@ public abstract class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String password;
+    private String id;
+    private byte[] password;
+    private byte[] salt;
     private String email;
     private String name;
     private int beepExt;
     private int phoneExt;
         
-    public Long getId() {
+    public String getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
-    public String getPassword() {
+    public byte[] getPassword() {
         return password;
     }
-    public void setPassword(String password) {
+    public void setPassword(byte[] password) {
         this.password = password;
+    }
+    public byte[] getSalt() {
+        return salt;
+    }
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
     public String getEmail() {
         return email;
