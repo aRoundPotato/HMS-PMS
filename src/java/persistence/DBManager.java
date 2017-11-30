@@ -82,25 +82,7 @@ public class DBManager {
         } 
         return results;
     } */
-    
-    public static boolean addUser(EntityManager em, UserTransaction utx, User u) {
-        if(findUserByID(em,u.getId()).equals(u)){
-            try{
-                utx.begin();
-                em.persist(u);
-                utx.commit();
-                return true;
-            } catch (Exception ex) {
-            //something 
-            }
-        }
-        return false;
-    }
-    
-    public static User findUserByID(EntityManager em, Long id){
-        User u = em.find(User.class, id);
-        return u;
-    }
+  
     
     public static User findUserByUserName(EntityManager em, String username ){
         Query query = em.createQuery(
