@@ -38,6 +38,25 @@ public class Patient implements Serializable {
     private String eContactAddress;
     private enum status{WAITING,ADMITTED,DISCHARGED} ;
     
+    public Patient(Long govID, String firstName, String lastName, Date dob, String address, char gender, String phone, String maritalStatus, Long insuranceNum, String eContactName, String eContactPhone, String eContactAddress) {
+        this.govID = govID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.address = address;
+        this.gender = gender;
+        this.phone = phone;
+        this.maritalStatus = maritalStatus;
+        this.insuranceNum = insuranceNum;
+        this.eContactName = eContactName;
+        this.eContactPhone = eContactPhone;
+        this.eContactAddress = eContactAddress;
+    }
+    
+    public Patient(){
+        
+    }
+    
     public Long getId() {
         return id;
     }

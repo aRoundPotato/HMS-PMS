@@ -15,17 +15,53 @@
                        
                         <h:panelGrid columns="2" >
                             <h:outputText value="Government ID"/>
-                            <h:inputText value="#{patientBean.govermentID}"/>
-                            <h:outputText value="#{msg['gender']}" />
-                               <h:selectOneMenu id="category" 
-                                         value="#{catalogBean.category}" 
+                            <h:inputText id="governmentID" required="true" value="#{patientBean.govermentID}"/>
+                            <h:outputText value="First Name"/>
+                            <h:inputText id="firstName" required="true" value="#{patientBean.firstName}"/>
+                            <h:outputText value="Last Name"/>
+                            <h:inputText id="lastName" required="true" value="#{patientBean.lastName}"/>
+                            <h:outputText value="Patient Address"/>
+                            <h:inputText id="address" required="true" value="#{patientBean.address}"/>
+                            <h:outputText value="Date of Birth"/>
+                            <h:inputText id="dob" required="true" value="#{patientBean.dob}"/>
+                            <h:outputText value="Gender" />
+                               <h:selectOneMenu id="gender" 
+                                         value="#{patientBean.gender}" 
                                          required="true">
-                                <f:selectItem id="cat1" itemLabel="Male" itemValue="kids" />
-                                <f:selectItem id="cat2" itemLabel="Female" itemValue="tech" />
+                                <f:selectItem itemLabel="Male" itemValue="m" />
+                                <f:selectItem itemLabel="Female" itemValue="f" />
                                 </h:selectOneMenu>
+                            <h:outputText value="Phone Number"/>
+                            <h:inputText id="phoneNumber" required="true" value="#{patientBean.phoneNumber}"/>
+                            <h:outputText value="Patient Address"/>
+                            <h:inputText id="insurance" required="true" value="#{patientBean.insurance}"/>
+                            
+                            <h:outputText style="font-size:  medium" value="Next Of Kin" escape="false" /><br/>
+                            <h:outputText value="Next of Kin First Name"/>
+                            <h:inputText id="kinFirstName" required="true" value="#{patientBean.kinFirstName}"/>
+                            <h:outputText value="Next of Kin Last Name"/>
+                            <h:inputText id="kinLastName" required="true" value="#{patientBean.kinLastName}"/>
+                            <h:outputText value="Next of Kin Address"/>
+                            <h:inputText id="kinAddress" required="true" value="#{patientBean.kinAddress}"/>
+                            <h:outputText value="Next of Kin Phone Number"/>
+                            <h:inputText id="kinPhoneNumber" required="true" value="#{patientBean.kinPhoneNumber}"/>
                                
                         </h:panelGrid>
+                       <h:commandButton value="Register" type="command" actionListener="#{patientBean.registerPatient}">
+                                                           <f:ajax execute="governmentID firstName lastName address dob gender phoneNumber insurance kinFirstName kinLastName kinAddress kinPhoneNumber" />
+
+                       </h:commandButton>
                         <h:commandButton value="Cancel" type="reset" />
+                        
+                        <div>
+                    <hr/>
+                    <hr/>
+                    <h:outputText  
+                        
+                        style="color:royalblue; font-size: large; font-weight: bold" 
+                        id="status" 
+                        value="#{patientBean.status}"/>
+                </div>
                 
                    </h:form>
                </f:view>

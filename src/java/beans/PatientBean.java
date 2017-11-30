@@ -7,8 +7,15 @@ package beans;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ResourceBundle;
+import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import persistence.DBManager;
+import persistence.Patient;
 
 /**
  *
@@ -17,26 +24,40 @@ import javax.inject.Named;
 @Named(value = "patientBean")
 @RequestScoped
 public class PatientBean implements Serializable {
-    private int govermentID;
+    private long govermentID;
     private Date dob;
     private char gender;
-    private char maritalStatus;
+    private String maritalStatus;
     private String firstName;
     private String lastName;
     private String address;
-    private int telephone;
+    private String phoneNumber;
     private int externalDoctor;
+    private Long insurance;
     private String kinFirstName;
     private String kinLastName;
     private String relationship;
     private String kinAddress;
-    private int kinTelephone;
+    private String kinPhoneNumber;
+    private String status;
 
-    public int getGovermentID() {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    @PersistenceContext(unitName = "HMS-PMS_PU")
+    private EntityManager em;
+    @Resource
+    private javax.transaction.UserTransaction utx;
+
+    public long getGovermentID() {
         return govermentID;
     }
 
-    public void setGovermentID(int govermentID) {
+    public void setGovermentID(long govermentID) {
         this.govermentID = govermentID;
     }
 
@@ -47,7 +68,14 @@ public class PatientBean implements Serializable {
     public void setDob(Date dob) {
         this.dob = dob;
     }
+    
+    public Long getInsurance() {
+        return insurance;
+    }
 
+    public void setInsurance(Long insurance) {
+        this.insurance = insurance;
+    }
     public char getGender() {
         return gender;
     }
@@ -56,11 +84,11 @@ public class PatientBean implements Serializable {
         this.gender = gender;
     }
 
-    public char getMaritalStatus() {
+    public String getMaritalStatus() {
         return maritalStatus;
     }
 
-    public void setMaritalStatus(char maritalStatus) {
+    public void setMaritalStatus(String maritalStatus) {
         this.maritalStatus = maritalStatus;
     }
 
@@ -88,12 +116,12 @@ public class PatientBean implements Serializable {
         this.address = address;
     }
 
-    public int getTelephone() {
-        return telephone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelephone(int telephone) {
-        this.telephone = telephone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getExternalDoctor() {
@@ -136,16 +164,25 @@ public class PatientBean implements Serializable {
         this.kinAddress = kinAddress;
     }
 
-    public int getKinTelephone() {
-        return kinTelephone;
+    public String getKinPhoneNumber() {
+        return kinPhoneNumber;
     }
 
-    public void setKinTelephone(int kinTelephone) {
-        this.kinTelephone = kinTelephone;
+    public void setKinPhoneNumber(String kinPhoneNumber) {
+        this.kinPhoneNumber = kinPhoneNumber;
     }
     
     public void registerPatient(){
-        
+        FacesContext context = FacesContext.getCurrentInstance();
+        ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
+        String eContactName = firstName + lastName;
+        Patient newPatient = new Patient(govermentID, firstName, lastName, dob, address, gender, phoneNumber, maritalStatus, insurance, eContactName, kinPhoneNumber, kinAddress);
+        if(DBManager.addPatient(em, utx, newPatient)){
+            status = (bundle.getString("addOk"));
+        }
+        else{
+            status =(bundle.getString("addFail"));
+        }
     }
     
     
