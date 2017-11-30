@@ -8,7 +8,7 @@
     <f:view locale="#{switchLanguage.locale}">
         <h:form>
             <h:panelGrid columns="1">
-                <h:button value="#{msg['thing']}" outcome ="banner" />
+                <!--<h:button value="#{msg['thing']}" outcome ="banner" />-->
             </h:panelGrid>
         </h:form>
         <h:form>
@@ -18,6 +18,7 @@
                valueChangeListener="#{switchLanguage.localeChanged}">
                 <f:selectItems value="#{switchLanguage.languageList}" /> 
             </h:selectOneMenu> 
+            <h:button outcome="operations" value="Operations"/>
         </h:panelGrid> 
         </h:form>
    </f:view>
